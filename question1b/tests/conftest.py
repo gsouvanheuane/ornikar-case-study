@@ -1,0 +1,1 @@
+plugins = ["pytest-bigquery-mock"]
