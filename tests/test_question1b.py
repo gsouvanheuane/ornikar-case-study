@@ -1,6 +1,6 @@
 import pytest
 from src import generate_agg_dept
-from google.cloud import bigquery
+
 @pytest.mark.parametrize(
     "mock_partnership_type, mock_begin_date, mock_end_date",
     [

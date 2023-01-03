@@ -26,8 +26,9 @@ def get_cached_departement(cache: Cache, meeting_point_id: int, lon: float, lat:
     """
     Function get_cached_departement.
     Use this function to get the departement where belong the meeting_point_id. If the meeting_point departement is
-    not cached yet, the result will me saved for later use. To determine the departement of a meeting_point_id,
-    this function will call the Reverse Geocoding API created by the France gouvernment (open source)
+    not cached yet, the result will be saved for later use. To determine the departement of a meeting_point_id,
+    this function will call the Reverse Geocoding API created by the France gouvernment
+    (see https://adresse.data.gouv.fr/api-doc/adresse#reverse)
     :param cache(Cache):  instance of the object Cache
     :param meeting_point_id(int): id of the meeting point to fetch the cached departement code associated
     :param lon (float): longitude of the meeting point
