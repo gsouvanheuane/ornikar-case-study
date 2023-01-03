@@ -1,5 +1,7 @@
 # created by virtualenv automatically
 
 .*
-bin/*
-lib/*
+bin
+lib
+secrets
+pyvenv.cfg

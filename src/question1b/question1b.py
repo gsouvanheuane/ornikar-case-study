@@ -24,12 +24,15 @@ def validate(date_text: str) -> None:
 
 def get_cached_departement(cache: Cache, meeting_point_id: int, lon: float, lat: float) -> int:
     """
-    Function get_cached_departement
+    Function get_cached_departement.
+    Use this function to get the departement where belong the meeting_point_id. If the meeting_point departement is
+    not cached yet, the result will me saved for later use. To determine the departement of a meeting_point_id,
+    this function will call the Reverse Geocoding API created by the France gouvernment (open source)
     :param cache(Cache):  instance of the object Cache
-    :param meeting_point_id:
-    :param lon:
-    :param lat:
-    :return:
+    :param meeting_point_id(int): id of the meeting point to fetch the cached departement code associated
+    :param lon (float): longitude of the meeting point
+    :param lat(float): latitude of the meeting point
+    :return: the department code(int)
     """
     departement_code = cache.departement_cached(meeting_point_id)
     if departement_code:
@@ -44,7 +47,14 @@ def get_cached_departement(cache: Cache, meeting_point_id: int, lon: float, lat:
         return departement_code_found
 
 
-def generate_agg_dept(partnership_type: list = [], begin_date: str = '', end_date: str = '') -> pd.DataFrame:
+def generate_agg_dept(partnership_type: list = [], begin_date: str = '', end_date: str = '') -> dict:
+    """
+    Function generate_agg_dept.
+    :param partnership_type(list): list of the partnership_type
+    :param begin_date(str): begin date of the aggregation, the format should be YYYY-MM-DD
+    :param end_date(str): end date of the aggregation, the format should be YYYY-MM-DD
+    :return: dictionary of each departement with the number of lesson booked according to the param selected
+    """
     try:
         try:
             validate(begin_date)
@@ -98,14 +108,18 @@ def generate_agg_dept(partnership_type: list = [], begin_date: str = '', end_dat
 
                 df_groupby = df.groupby(["dept_code"])["count_lessons_booked"].sum()
                 print("--- The query took %s seconds ---" % (time.time() - start_time))
-                return df_groupby
+                return df_groupby.to_dict()
             else:
-                return df
+                return {}
     except Exception:
         raise
 
 
 def prompt():
+    """
+    Function prompt.
+    Use this function to launch the prompt to use generate_agg_dept()
+    """
     print("Welcome")
     print("Please type Ctrl+Z if you want to quit the script")
     while True:
@@ -126,15 +140,11 @@ def prompt():
             else:
                 print(
                     f'Generating the number of lessons booked by sub-region for partnerships {partnership_input_list} from {begin_date_input} to {end_date_input}')
-                df = generate_agg_dept(partnership_input_list, begin_date_input, end_date_input)
-                if df.empty:
+                list_result = generate_agg_dept(partnership_input_list, begin_date_input, end_date_input)
+                if len(list_result) == 0:
                     print('No result found. Try to modify the parameters')
                 else:
-                    pd.options.display.width = None
-                    pd.options.display.max_columns = None
-                    pd.set_option('display.max_rows', 3000)
-                    pd.set_option('display.max_columns', 3000)
-                    print(df)
+                    print(list_result)
                 replay = input('Run again? (y/n) ')
                 if replay.lower() == 'n':
                     break
@@ -144,3 +154,4 @@ def prompt():
         except Exception as e:
             print('Something went wrong: ', e)
             break
+
