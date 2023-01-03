@@ -1,8 +1,6 @@
 # ornikar-case-study
 Developed by Gaëlle Souvanheuane
 
----
-
 ## Installation
 Please run the following command:
 

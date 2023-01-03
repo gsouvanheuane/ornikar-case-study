@@ -5,3 +5,4 @@ bin
 lib
 secrets
 pyvenv.cfg
+__pycache__
