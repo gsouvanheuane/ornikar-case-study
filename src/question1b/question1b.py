@@ -67,7 +67,7 @@ def generate_agg_dept(partnership_type: list = [], begin_date: str = '', end_dat
             client = bigquery.Client()
             query = f"""
                 SELECT 
-                   ` count(distinct ls.Lesson_id)` as count_lessons_booked,
+                   count(distinct ls.Lesson_id) as count_lessons_booked,
                     m.meeting_point_id,
                     m.mp_longitude,
                     m.mp_latitude
