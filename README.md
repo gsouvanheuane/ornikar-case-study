@@ -12,6 +12,7 @@ You need to add a `.env` file at the root and set it up as follow:
 GOOGLE_APPLICATION_CREDENTIALS= path/to/secrets.json
 ````
 The variable `GOOGLE_APPLICATION_CREDENTIALS` should be the path to the json file which contains the credentials to connect to the BigQuery database
+
 ## Usage
 You will find all answers of the case study in `src/`
 - To run question 1a: ` python -m src.question1a `
