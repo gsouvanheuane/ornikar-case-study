@@ -8,7 +8,7 @@ Please run the following command:
 
 ## Pre-requirements
 You need to add a `.env`
-file and set it up as follow:
+file at the root and set it up as follow:
 ````
 GOOGLE_APPLICATION_CREDENTIALS= path/to/secrets.json
 ````
