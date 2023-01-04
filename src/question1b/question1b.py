@@ -2,12 +2,12 @@ import os
 from src.question1b.obj import Cache
 import requests
 from google.cloud import bigquery
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import pandas as pd
 import time
 import datetime
 
-load_dotenv(find_dotenv())
+load_dotenv()
 
 
 def validate(date_text: str) -> None:
