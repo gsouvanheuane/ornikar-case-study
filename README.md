@@ -6,7 +6,7 @@ Please run the following command:
 
 ``virtualenv .venv && source .venv/bin/activate && pip install -r requirements.txt``
 
-## Pre-requirements
+## Pre-requirement
 You need to add a `.env` file at the root and set it up as follow:
 ````
 GOOGLE_APPLICATION_CREDENTIALS= path/to/secrets.json
