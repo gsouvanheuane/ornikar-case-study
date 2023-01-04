@@ -1,0 +1,8 @@
+# created by virtualenv automatically
+
+.*
+bin
+lib
+secrets
+pyvenv.cfg
+__pycache__
