@@ -4,7 +4,7 @@ Developed by Gaëlle Souvanheuane
 ## Installation
 Please run the following command:
 
-``pip install -r requirements.txt``
+``virtualenv .venv && source .venv/bin/activate && pip install -r requirements.txt``
 
 ## Pre-requirements
 You need to add a `.env`
