@@ -16,4 +16,4 @@ The variable `GOOGLE_APPLICATION_CREDENTIALS` should be the path to the json fil
 You will find all answers of the case study in `src/`
 - To run question 1a: ` python -m src.question1a `
 - To run question 1b: `python -m src.question1b`
-  - Run Unitary Tests: `pytest -v tests/`
+  - To run Unitary Tests: `pytest -v tests/`
