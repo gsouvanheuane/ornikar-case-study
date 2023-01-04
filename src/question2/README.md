@@ -19,20 +19,21 @@ J'aurai préféré completer la table ``meeting_points`` dans BigQuery en ajouta
 L'avantage de populer par batch est de faire moins d'appel API mais en contre-partie, il existera un lapse de temps où la donnée de
 ``departement_code`` n'existera pas encore pour les nouveaux meeting_points
 
-Populer la colonne dès la création d'un meeting_point pallie cet inconvénient mais derrière demandera plus de ressource car 
+Populer la colonne dès la création d'un meeting_point pallie cet inconvénient mais en échange demandera plus de ressource car 
 les appels API se feront point par point. Cette solution est adaptée s'il y a besoin d'avoir le résultat du script en live. 
 
 En implémentant ce script, j'ai plutot visualisé son utilisation par un collaborateur d'Ornikar et donc je fais l'assomption qu'il n'y
-a pas de necessité d'avoir l'information du département en direct. La solution de populer par batch me semble dans ce cas être plus approprié.
+a pas de necessité d'avoir l'information du département en direct. La solution de populer par batch me semble dans ce cas être plus appropriée.
 
-#### Limite 2 : Utilisation d'une API de reverse geocoding uniquement pour les départements français
+#### Limite 2 : Choix de l'API de reverse geocoding 
 L'avantage de l'API de data.gouv est qu'elle est gratuite mais elle possède des limites.
 
 Dans un premier temps, il n'est pas possible de l'utiliser en batch, le reverse géocoding se fait point par point
-et dans le cadre d'une internationalisation de la plateforme, cette API ne serait plus adaptée. 
+et dans le cadre d'une internationalisation de la plateforme, cette API ne serait plus adaptée car elle ne contient que les
+données des localisation en France. 
 
-Il faudrait utiliser une autre API comme celle de Google Maps qui sera plus adapté et qui propose plus de fonctionnalité,
-tout en gardant un oeil sur le coût.
+Il faudrait utiliser une autre API comme celle de Google Maps qui sera plus adapté et qui propose plus de fonctionnalité
+(avec une attention a porter sur le coût).
 
 
 #### Point à tester
@@ -46,7 +47,7 @@ En supposant que le modèle de labelisation a déjà été entrainé, voici les 
 pour mettre à disposition le label des creneaux : 
 - Créer, si necessaire, le pipeline qui va regrouper les fonctions permettant de transformer la donnée brute en un format 
 de donnée acceptable pour l'entrée du modèle
-- Enregistrer le modèle et le mettre à disposition dans un dépot (model repository), en faisant attention à bien versioner le modèle
+- Enregistrer le modèle et le mettre à disposition dans un dépot, en faisant attention à bien versioner le modèle
 - Mettre à disposition le modèle et le code d'inférence dans une API
 - Ajouter dans BigQuery la colonne qui contiendra la valeur du label 
-- A l'insertion de nouveaux créneaux, appeler l'API définie et inserer la prédiction dans la colonne dédiée
+- A l'insertion de nouveaux créneaux, appeler l'API définie précédemment et inserer la prédiction dans la colonne dédiée
